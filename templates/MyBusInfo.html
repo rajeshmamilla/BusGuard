@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Get My Info</title>
+    <style>
+        /* Overlay Styling */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(230, 245, 255, 0.5));
+            backdrop-filter: blur(3px);
+            z-index: 1;
+        }
+
+        /* General Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: url('https://img.freepik.com/premium-photo/massive-display-charter-buses-ready-group-travel_1079150-299317.jpg?semt=ais_hybrid') center/cover no-repeat;
+            position: relative;
+        }
+
+        /* Header Styling */
+        .header {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            width: 100%;
+            text-align: right;
+            position: fixed;
+            top: 0;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #1976d2;
+            margin: 0;
+        }
+
+        .header button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 6px;
+            background: transparent;
+            color: #1976d2;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .header button:hover {
+            background-color: #1976d2;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: #1976d2;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 12px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #004d8c;
+        }
+
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            z-index: 2;
+            margin-top: 90px;
+        }
+
+        /* Marquee Styling */
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            background: white; /* White background */
+            color: darkblue; /* Dark blue text */
+            font-weight: bold;
+            font-size: 1.5em;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #1976d2, #42a5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(33, 150, 243, 0.5), 0 0 10px rgba(33, 150, 243, 0.3);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(33, 150, 243, 0.5), 0 0 30px rgba(33, 150, 243, 0.3);
+            }
+        }
+
+        /* Row Styling */
+        .row {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Box Styling */
+        .box {
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #e3f2fd;
+            border: 1px solid #1976d2;
+            flex: 1;
+            min-width: 200px;
+            max-width: 220px;
+            text-align: center;
+        }
+
+        /* Link Styling */
+        .info-link {
+            display: block;
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 1.2em;
+            text-decoration: none;
+            padding: 10px 0;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .info-link:hover {
+            color: #004d8c;
+            text-shadow: 0 0 10px rgba(33, 150, 243, 0.7);
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: white; /* White background */
+            color: darkblue; /* Dark blue text */
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>BusGuard</h1>
+        <nav class="nav-links">
+            <a href="ticket_status.html">Ticket Status</a>
+            <a href="my_wallet.html">My Wallet</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+        </nav>
+        <button onclick="window.location.href='login.html';">Login / Sign Up</button>
+    </div>
+
+    <!-- Marquee -->
+    
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Get My Info</h1>
+        <div class="row">
+            <div class="box">
+                <a href="{% url 'search_platform' %}" class="info-link">Platform Info</a>
+            </div>
+            <div class="box">
+                <a href="track_bus.html" class="info-link">Track Bus</a>
+            </div>
+            <div class="box">
+                <a href="{% url 'search_bus' %}" class="info-link">Bus Schedule</a>
+            </div>
+        </div>
+    </div>
+
+   
+    
+</body>
+</html>

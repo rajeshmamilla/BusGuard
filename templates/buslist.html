@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bus Runtimes</title>
+</head>
+<body>
+    <h1>Bus Runtimes</h1>
+    <table border="1">
+        <tr>
+            <th>Sl. No</th>
+            <th>Service No</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>PT No</th>
+        </tr>
+        {% for runtime in bus_runtimes %}
+        <tr>
+            <td>{{ runtime.sl_no }}</td>
+            <td>{{ runtime.service_no }}</td>
+            <td>{{ runtime.from_location }}</td>
+            <td>{{ runtime.to_location }}</td>
+            <td>{{ runtime.date }}</td>
+            <td>{{ runtime.time }}</td>
+            <td>{{ runtime.pt_no }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_bus_runtime' %}">Add New Runtime</a>
+</body>
+</html>

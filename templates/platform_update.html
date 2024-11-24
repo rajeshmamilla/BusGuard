@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search and Update Platform Details</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Search and Update Platform Details</h1>
+    
+    <!-- Form to Search -->
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Display Error if no results -->
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <!-- Table to display results -->
+    {% if platform_data %}
+        <h2>Platform Details</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Platform No</th>
+                    <th>Depot Name</th>
+                    <th>Current Bus</th>
+                    <th>Next Bus</th>
+                    <th>Arrives/Departs In</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for platform in platform_data %}
+                    <tr id="row-{{ platform.id }}">
+                        <td>
+                            <input 
+                                type="text" 
+                                value="{{ platform.pt_no }}" 
+                                id="platform-input-{{ platform.id }}" 
+                            />
+                        </td>
+                        <td>{{ platform.depot_name }}</td>
+                        <td>{{ platform.currentbus }}</td>
+                        <td>{{ platform.nextbuss }}</td>
+                        <td>{{ platform.arrives_departs_in }}</td>
+                        <td>
+                            <button 
+                                class="update-btn" 
+                                data-id="{{ platform.id }}" 
+                                data-url="{% url 'update_platform' %}"
+                            >
+                                Update
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    <script>
+        // jQuery to handle update
+        $(document).on("click", ".update-btn", function() {
+            const platformId = $(this).data("id");
+            const updateUrl = $(this).data("url");
+            const newPlatformNo = $(`#platform-input-${platformId}`).val();
+            
+            // Send AJAX request to update the platform number
+            $.ajax({
+                url: updateUrl,
+                type: "POST",
+                data: {
+                    'id': platformId,
+                    'new_platform_no': newPlatformNo,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                },
+                success: function(response) {
+                    alert("Platform updated successfully!");
+                },
+                error: function() {
+                    alert("Failed to update platform. Please try again.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

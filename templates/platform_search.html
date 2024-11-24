@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Update</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Platform Search and Update</h1>
+
+    <!-- Form to search platform -->
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if platform_data %}
+        <h2>Platform Details</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Platform No</th>
+                    <th>Depot Name</th>
+                    <th>Current Bus</th>
+                    <th>Next Bus</th>
+                    <th>Arrives/Departs In</th>
+                    <th>Update Platform</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" id="platform_no_{{ platform_data.id }}" value="{{ platform_data.pt_no }}" class="platform-no" data-id="{{ platform_data.id }}"></td>
+                    <td>{{ platform_data.depot_name }}</td>
+                    <td>{{ platform_data.currentbus }}</td>
+                    <td>{{ platform_data.nextbuss }}</td>
+                    <td>{{ platform_data.arrives_departs_in }}</td>
+                    <td><button type="button" class="update-btn" data-id="{{ platform_data.id }}">Update</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% if success_message %}
+            <p style="color: green;">{{ success_message }}</p>
+        {% endif %}
+    {% endif %}
+    <a href="{% url 'platform_search' %}">Search Platform Details</a>
+
+    <script>
+        // jQuery to handle the dynamic update
+        $(document).on('click', '.update-btn', function() {
+            var platformId = $(this).data('id');
+            var newPlatformNo = $('#platform_no_' + platformId).val();
+
+            $.ajax({
+                url: '{% url "update_platform" %}',  // This is the URL for the update view
+                type: 'POST',
+                data: {
+                    'id': platformId,
+                    'new_platform_no': newPlatformNo,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                        // Optionally, update the table without reloading the page
+                        // For example, you can show the updated platform number
+                        $('#platform_no_' + platformId).val(newPlatformNo);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("An error occurred while updating the platform number.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Platforms</title>
+</head>
+<body>
+    <h2>List of Platforms</h2>
+
+    {% if platforms %}
+        <form method="POST">
+            {% csrf_token %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Platform Number</th>
+                        <th>Depot Name</th>
+                        <th>Current Bus</th>
+                        <th>Next Bus</th>
+                        <th>Arrival/Departure Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for platform in platforms %}
+                        <tr>
+                            <!-- Editable Platform Number -->
+                            <td>
+                                <input type="text" name="platform_{{ platform.id }}" value="{{ platform.pt_no }}" required>
+                            </td>
+                            <td>{{ platform.depot_name }}</td>
+                            <td>{{ platform.currentbus }}</td>
+                            <td>{{ platform.nextbuss }}</td>
+                            <td>{{ platform.arrives_departs_in }}</td>
+                            <!-- Update Button -->
+                            <td>
+                                <button type="submit" name="update_platform" value="{{ platform.id }}">
+                                    Update
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    {% else %}
+        <p>No platforms available.</p>
+    {% endif %}
+
+    <a href="{% url 'add_platform' %}">Add Platform</a>
+</body>
+</html>

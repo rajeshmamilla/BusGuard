@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Search</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 40px;
+        }
+
+        h1, h2 {
+            color: #5D6D7E;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-container input[type="text"] {
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .form-container button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Table Styling */
+        .results-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #5D6D7E;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .form-container, .results-container {
+                padding: 15px;
+            }
+
+            table th, table td {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .form-container button {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Search Bus Platform</h1>
+
+        <!-- Search Form -->
+        <div class="form-container">
+            <form method="get">
+                {% csrf_token %}
+                <div>
+                    {{ form.as_p }}
+                </div>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <!-- Display Platform Results -->
+        {% if platforms %}
+        <div class="results-container">
+            <h2>Platform Details</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Platform Number</th>
+                        <th>Depot Name</th>
+                        <th>Current Bus</th>
+                        <th>Next Bus</th>
+                        <th>Arrives/Departs In</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for platform in platforms %}
+                    <tr id="row-{{ platform.id }}">
+                        <td>{{ platform.pt_no }}</td>
+                        <td>{{ platform.depot_name }}</td>
+                        <td>{{ platform.currentbus }}</td>
+                        <td>{{ platform.nextbuss }}</td>
+                        <td>{{ platform.arrives_departs_in }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="results-container">
+            <p>No platforms found based on your search criteria.</p>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

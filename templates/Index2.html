@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Bus Information</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Overlay Styling */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(230, 245, 255, 0.5));
+            backdrop-filter: blur(3px);
+            z-index: 1;
+        }
+
+        /* General Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: url('https://img.freepik.com/premium-photo/massive-display-charter-buses-ready-group-travel_1079150-299317.jpg?semt=ais_hybrid') center/cover no-repeat;
+            position: relative;
+        }
+
+        /* Header Styling */
+        .header {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            width: 100%;
+            text-align: right;
+            position: fixed; 
+            top: 0;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #1976d2;
+            margin: 0;
+        }
+
+        .header button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 2px solid #1976d2;
+            border-radius: 6px;
+            background: transparent;
+            color: #1976d2;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .header button:hover {
+            background-color: #1976d2;
+            color: white;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: #1976d2;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 12px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #004d8c;
+        }
+
+        /* Container Styling */
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 90%;
+            position: relative;
+            z-index: 2;
+            margin-top: 100px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1976d2;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #e3f2fd;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay -->
+    <div class="overlay"></div>
+    
+    <!-- Header -->
+    <div class="header">
+        <h1>BusGuard</h1>
+        <nav class="nav-links">
+            <a href="ticket_status.html">Ticket Status</a>
+            <a href="my_wallet.html">My Wallet</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+        </nav>
+        <button onclick="window.location.href='login.html';">Login / Sign Up</button>
+    </div>
+
+    <!-- Content Container -->
+    <div class="container">
+        <h1>RTC Bus Platform Information</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Vehicle No</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Service No</th>
+                    <th>Platform Allotted</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bus in buses %}
+                <tr>
+                    <td>{{ bus.sno }}</td>
+                    <td>{{ bus.veh_no }}</td>
+                    <td>{{ bus.from_location }}</td>
+                    <td>{{ bus.to_location }}</td>
+                    <td>{{ bus.service_no }}</td>
+                    <td>{{ bus.pt_alloted }}</td>
+                    <td>{{ bus.time }}</td>
+                    <td>{{ bus.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
