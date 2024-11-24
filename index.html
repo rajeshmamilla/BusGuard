@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Platform Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://img.freepik.com/premium-photo/massive-display-charter-buses-ready-group-travel_1079150-299317.jpg?semt=ais_hybrid') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(230, 245, 255, 0.5));
+            backdrop-filter: blur(3px);
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1976d2;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: #1976d2;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 12px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #004d8c;
+        }
+
+        /* Login/Signup Button */
+        .login-signup a {
+            color: #1976d2;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 2px solid #1976d2;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .login-signup a:hover {
+            background-color: #1976d2;
+            color: white;
+        }
+
+        /* Content Styling */
+        .content {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 800px;
+            margin-top: 60px;
+            z-index: 2;
+        }
+
+        h2 {
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        /* Highlighted Text */
+        .highlight {
+            color: #1976d2;
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 38px;
+        }
+
+        /* Main Button Styling */
+        .main-button {
+            padding: 15px 40px;
+            font-size: 20px;
+            margin-top: 30px;
+            background: linear-gradient(to right, #1976d2, #42a5f5);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Other Services Section */
+        .other-services h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Other Service Buttons */
+        .service-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .service-button {
+            padding: 15px 0;
+            font-size: 18px;
+            background: linear-gradient(to right, #66bb6a, #388e3c);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 180px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <!-- Header with Logo and Navigation Links -->
+    <header>
+        <h1 class="logo">BusGuard</h1>
+        <nav class="nav-links">
+            <a href="ticket_status.html">Ticket Status</a>
+            <a href="my_wallet.html">My Wallet</a>
+            <a href="about_us.html">About Us</a>
+            <a href="contact_us.html">Contact Us</a>
+        </nav>
+        <div class="login-signup">
+            <a href="Login.html">Login / Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <h2>Welcome to <span class="highlight">BusGuard</span></h2>
+        <button class="main-button" onclick="window.location.href='MyBusInfo.html';">My Bus Info</button>
+
+        <!-- Other Services Section -->
+        <div class="other-services">
+            <h3>Other Services</h3>
+            <div class="service-buttons">
+                <button class="service-button">Book</button>
+                <button class="service-button">Buy Ticket</button>
+                <button class="service-button">Upcoming</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
